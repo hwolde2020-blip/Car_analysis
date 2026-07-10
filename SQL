@@ -1,1 +1,29 @@
-
+REMOVE '-'TP NULL FOR MAKE, MODEL AND COLOR COLUMNS.
+SELECT
+    make,
+    model,
+    CASE  
+        WHEN color = '-' THEN NULL
+        ELSE color
+    END AS clean_color,
+    CASE
+        WHEN interior = '-' THEN NULL
+        ELSE interior
+    END AS clean_interior
+FROM dbo.[car prices];
+TO REMOVE OR REPLACE UNKNOWN DATE UNDER MAKE COLUMN
+.UPDATE [dbo].[car prices]
+SET [make] = NULL
+WHERE [make] = '-';
+TO REMOVE TRAILING SPACES UNDER MODEL COLUMN
+UPDATE [dbo].[car prices]
+SET [TOYOTA] = LTRIM(RTRIM([model]));
+TO CHANGE ALL ENTRIES TO UPPERCASE SO 'TOYOTA and toyota match
+UPDATE [dbo].[car prices]
+SET [toyota] = UPPER([TOYOTA]);
+If your price column is currently stored as text/varchar
+ALTER TABLE [dbo].[car prices]
+ALTER COLUMN [price] DECIMAL(18, 2);
+DELETE THE COLUMN WITH NULL VALUE 
+DELETE FROM [dbo].[car prices]***********
+WHERE [column_name] IS NULL;
