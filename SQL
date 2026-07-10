@@ -12,7 +12,7 @@ SELECT
     END AS clean_interior
 FROM dbo.[car prices];
 TO REMOVE OR REPLACE UNKNOWN DATE UNDER MAKE COLUMN
-.UPDATE [dbo].[car prices]
+UPDATE [dbo].[car prices]
 SET [make] = NULL
 WHERE [make] = '-';
 TO REMOVE TRAILING SPACES UNDER MODEL COLUMN
