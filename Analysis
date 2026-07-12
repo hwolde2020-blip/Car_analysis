@@ -1,1 +1,51 @@
+Which manufacturers retain the most value?
 
+SELECT
+    manufacturer,
+    AVG(sellingprice / mmr) AS avg_value_retention
+FROM car_sales
+WHERE mmr > 0
+GROUP BY manufacturer
+ORDER BY avg_value_retention DESC;
+
+Do luxury brands have lower depreciation than economy brands?
+
+SELECT
+    CASE
+        WHEN manufacturer IN ('BMW','Mercedes-Benz','Audi','Lexus','Porsche','Jaguar','Acura','Infiniti')
+            THEN 'Luxury'
+        ELSE 'Economy'
+    END AS brand_type,
+    AVG(sellingprice / mmr) AS avg_retention
+FROM car_sales
+WHERE mmr > 0
+GROUP BY brand_type;
+
+Which seller generated the highest total sales revenue?
+
+SELECT
+    seller,
+    SUM(sellingprice) AS total_sales
+FROM car_sales
+GROUP BY seller
+ORDER BY total_sales DESC;
+
+What percentage of vehicles sold above MMR value?
+
+SELECT
+    ROUND(
+        100.0 * SUM(CASE WHEN sellingprice > mmr THEN 1 ELSE 0 END)
+        / COUNT(*),
+        2
+    ) AS percent_above_mmr
+FROM car_sales;
+
+Which brands most frequently sell below MMR?
+
+SELECT
+    manufacturer,
+    COUNT(*) AS vehicles_below_mmr
+FROM car_sales
+WHERE sellingprice < mmr
+GROUP BY manufacturer
+ORDER BY vehicles_below_mmr DESC;
