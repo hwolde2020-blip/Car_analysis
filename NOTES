@@ -1,0 +1,9 @@
+Cleaning change all character to lower case, close the space 
+
+UPDATE CarPrices
+SET make = LOWER(RTRIM(LTRIM(make))),
+    model = LOWER(RTRIM(LTRIM(model))),
+    body = LOWER(RTRIM(LTRIM(body))),
+    transmission = LOWER(RTRIM(LTRIM(transmission))),
+    state = LOWER(RTRIM(LTRIM(state)));
+
