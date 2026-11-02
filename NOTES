@@ -7,3 +7,24 @@ SET make = LOWER(RTRIM(LTRIM(make))),
     transmission = LOWER(RTRIM(LTRIM(transmission))),
     state = LOWER(RTRIM(LTRIM(state)));
 
+Remove rows with missing values 
+
+DELETE FROM CarPrices
+
+DELETE FROM dbo.[car prices]
+WHERE sellingprice IS NULL 
+   OR mmr IS NULL 
+   OR odometer IS NULL 
+   OR vin IS NULL;
+
+
+
+Impute missing categorical text fields with 'unknown'
+
+UPDATE CarPrices SET transmission = 'unknown' WHERE transmission IS NULL;
+UPDATE CarPrices SET body = 'unknown' WHERE body IS NULL;
+UPDATE CarPrices SET color = 'unknown' WHERE color IS NULL;
+UPDATE CarPrices SET interior = 'unknown' WHERE interior IS NULL;
+
+
+
